@@ -44,6 +44,12 @@ conversación, y permisos de clúster acotados a desplegar.
 
 ## Arranque
 
+La imagen la publica el workflow de GitHub Actions en cada push a `main`, como
+`ghcr.io/sinteclatam/agente-pod:latest` y `:sha-<commit>`. **El paquete de GHCR es privado aunque
+este repo sea público**: para usarlo desde otro clúster, o creas el secreto de descarga y
+descomentas `imagePullSecrets` en `k8s/10-serviceaccount.yaml`, o construyes la imagen tú mismo
+con `make publicar` apuntando a tu propio registro.
+
 ```bash
 # 1. Imagen (o deja que la publique el workflow de GitHub Actions)
 make publicar TAG=v1
@@ -98,3 +104,8 @@ historial y los repos clonados, así que el bucle arranca con `claude remote-con
 en el servidor, lo detecta y abre una limpia.
 
 Más detalle en [docs/OPERACION.md](docs/OPERACION.md) y [docs/SEGURIDAD.md](docs/SEGURIDAD.md).
+
+## Licencia
+
+Sin licencia declarada todavía: el código es público, pero legalmente sigue siendo "todos los
+derechos reservados". Si quieres que alguien pueda reutilizarlo, añade un `LICENSE`.
