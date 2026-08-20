@@ -1,0 +1,17 @@
+# Service sin IP, solo para dar identidad estable a los pods del StatefulSet (agente-pod-0,
+# agente-pod-1, ...). El agente no atiende conexiones entrantes.
+apiVersion: v1
+kind: Service
+metadata:
+  name: agente-pod
+  namespace: agentes
+  labels:
+    app.kubernetes.io/name: agente-pod
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: agente-pod
+  ports:
+    - name: ninguno
+      port: 9999
+      targetPort: 9999

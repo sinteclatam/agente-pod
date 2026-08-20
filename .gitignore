@@ -1,0 +1,4 @@
+.credenciales/
+*.credentials.json
+secretos.yaml
+.DS_Store

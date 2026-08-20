@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: agentes
+  labels:
+    app.kubernetes.io/part-of: agente-pod
+    # Pod Security Admission en modo restringido: aunque el agente pueda crear pods en su propio
+    # namespace, el API server rechaza cualquiera que pida privilegios, root o namespaces del host.
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted

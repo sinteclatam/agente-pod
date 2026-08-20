@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agente-pod-config
+  namespace: agentes
+data:
+  # Número de agentes. Cada agente es un pod con su propio volumen y su propia sesión de
+  # Remote Control. 'bin/aplicar.sh' lo traduce a réplicas del StatefulSet.
+  AGENTES: "1"
+
+  WORKDIR: /home/agente/workspace
+  MODO_PERMISOS: bypassPermissions
+
+  # continua  → una sesión por pod, que se retoma tal cual tras un reinicio (--continue).
+  # servidor  → un proceso sirviendo hasta SESIONES_MAX sesiones a la vez. Más denso, pero
+  #             Claude Code no permite combinar --capacity con --continue: al reiniciar,
+  #             las sesiones arrancan de cero.
+  MODO_SESION: continua
+  SESIONES_MAX: "1"
+
+  ESPERA_REINTENTO: "15"
+  GIT_USER_NAME: agente-pod
+  GIT_USER_EMAIL: agente-pod@sinteclatam.com
+  TZ: America/Bogota
